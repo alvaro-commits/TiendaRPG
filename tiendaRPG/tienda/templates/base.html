@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es-cl">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <title>TiendaRPG</title>
+</head>
+
+<body class="fondo">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 25px;">
+        <a class="navbar-brand" href="#" style="font-size: 30px;">TiendaRPG!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse items-nav" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto lista-nav">
+                {% if user.is_superuser %}
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/admin">Administrador<span class="sr-only">(current)</span></a>
+                    </form>
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/carro">Ver carro <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/logout">Salir <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                </li>
+                {% else %}
+                {% if user.is_authenticated %}
+                {% endif %}
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/">Productos<span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/carro">Ver carro <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="#">Perfil <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="#">Juega ahora! <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/logout">Salir <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                {% else %}
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/login">Ingresar <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form>
+                        <a class="nav-link" href="/registro">Registrarse <span class="sr-only">(current)</span></a>
+                    </form>
+                </li>
+                {% endif %}
+                {% endif %}
+        </div>
+    </nav>
+    {% block content %}
+
+
+    {% endblock %}
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.js' %}"></script>
+    <script src="{% static 'js/validador.js' %}"></script>
+
+</body>
+
+</html>

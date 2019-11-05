@@ -1,0 +1,192 @@
+body.fondo{
+    margin: 0;
+    padding: 0;
+    background-image: url(../img/FondoVerdeCuadrados.jpg);
+}
+
+.col-contenedor{
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+}
+
+.colum {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+}
+
+::placeholder {
+    color:white;
+  }
+
+.items-nav{
+    position: relative;
+}
+.lista-nav{
+    position: absolute;
+    right: 1%;
+}
+.caja{
+
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #70294e;
+    border-radius: 24px;
+    color: white;
+}
+
+.caja input[type = "text"],.caja input[type = "password"]{
+    border:0;
+    background: none;
+    display: block;
+    margin:20px auto;
+    text-align: center;
+    border: 2px solid #b1dca3;  
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.caja input[type = "submit"],.registro button[type = "submit"]{
+    border:0;
+    background: none;
+    display: block;
+    margin:20px auto;
+    text-align: center;
+    border: 2px solid #3498db;  
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+
+}
+
+
+
+
+.caja input[type = "submit"]:hover{
+background-color: #3498db;
+}
+
+.contenedorTexto{
+    text-align: center;
+}
+.caja input[type = "text"]:focus,.caja input[type = "password"]:focus{
+    width: 250px;
+    border-color: #3498db;
+}
+
+.caja h1{
+    text-align: center;
+    color:white;
+    text-transform:  uppercase;
+    font-weight: 500;
+}
+
+
+footer{
+    background: rgb(28,214,70);
+background: linear-gradient(254deg, rgba(28,214,70,1) 0%, rgba(33,136,22,1) 50%, rgba(28,214,70,1) 100%);
+}
+
+.curvo{
+    border-radius: 30px;
+}
+
+.logo{
+width: 100px;
+height: 100px;
+border-radius: 50%;
+position: relative;
+left: calc(50% - 50px);
+}
+
+.navlogo{
+    top: 3px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+    left: calc(10% - 50px);
+    }
+.registro{
+    color: white;
+    font-size: 18px;
+    width: 550px;
+    position: absolute;
+    padding: 40px;
+    margin-top: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #70294e;
+    border-radius: 24px;
+}
+
+.registro input[type = "text"],.registro input[type = "password"],.registro input[type = "email"]{
+
+    background: none;
+    border: 2px solid #b1dca3;  
+    outline: none;
+    color: white;
+}
+
+.registro input[type = "text"]:focus,.registro input[type = "password"]:focus,.registro input[type = "email"]:focus{
+    border: 2px solid #3498db; 
+}
+
+
+.registro h1{
+    text-align: center;
+    font-size: 25px;
+}
+
+
+.centrado{
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)
+}
+
+colorPrimarios{
+    background-color: #388e3c;
+}
+
+
+.carro h1{
+    text-align: center;
+}
+.producto {
+    position: relative;
+    height: 120px;
+}
+.producto label{
+    position: relative;
+    text-align: justify;
+}
+.producto img{
+height: 120px;
+width: 120px;
+}
+
+.card-producto{
+    padding: 30%;
+    margin: 30%;
+}
+
+.producto label{
+    padding: 1%;
+    font-size: 15px;
+    color: black;
+}
+
+.derecha{
+    position: relative;
+}

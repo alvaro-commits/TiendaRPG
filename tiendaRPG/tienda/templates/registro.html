@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form id="formulario" class="registro" method="POST" name="fRegistro">
+            {% csrf_token %}
+            <img src="{../../../static/img/logoXd.png" class="logo">
+            <h1 class="encabezado">Compra, gana puntos y juega!</h1>
+            <br>
+            <div class="row">
+                <div class=" col form-group">
+                    <label>Usuario </label>
+                    <input type="text" name="username" class="form-control">
+                </div>
+                <div class=" col form-group">
+                    <label>Correo Electrónico </label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <label>Nombre </label>
+                    <input type="text" name="first_name" class="form-control">
+                </div>
+                <div class="col form-group">
+                    <label>Apellido </label>
+                    <input type="text" name="last_name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group" <label>Contraseña</label>
+                <input type="password" name="password1" id="passw" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Confirmar contraseña</label>
+                <input type="password" name="password2" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+            <small class="text-muted as" style="font-size: 18px;">
+                ¿Ya estas registrado? <a href="/login" class="a-c">Ingresar</a>
+            </small>
+        </form>
+{% endblock %}
