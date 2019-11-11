@@ -5,6 +5,6 @@ from . import models as m
 class ProductosAdmin(admin.ModelAdmin):
     list_display = ('nombreProducto','codigo_producto','precio','puntos','descripcion','stock')
 
-
-admin.site.register(m.Usuario),
+admin.site.register(m.Personaje),
+admin.site.register(m.Carrito),
 admin.site.register(m.Productos,ProductosAdmin)

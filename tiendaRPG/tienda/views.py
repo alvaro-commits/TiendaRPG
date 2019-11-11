@@ -5,15 +5,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
-# Create your views here.
-
-
+from django.views.generic import ListView, DetailView
 
 
 def index(request):
-    productos = mod.Productos.objects.all()
-    return render(request,'index.html', 
-    {'productos': productos})
+    contexto = {
+        'productos' : mod.Productos.objects.all()
+    }
+    return render(request,'index.html', contexto)
 
 @login_required
 def carro(request):
@@ -36,3 +35,8 @@ def registro(request):
     else:
         form = UserRegisterForm()
     return render(request,'registro.html',{'form': form})
+
+class VistaMenu(ListView):
+    model = mod.Productos
+    template_name = "index.html"
+

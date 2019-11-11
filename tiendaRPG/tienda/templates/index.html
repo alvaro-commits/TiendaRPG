@@ -86,7 +86,7 @@
             <!-- productos -->
 
             <div class="row">
-                {% for producto in productos %}
+                {% for producto in object_list %} 
                 <div class="col-sm-4 d-flex pb-3 ">
                     <div class="card card-block" style="width: 18rem">
                         <img src="{{ producto.urlImagen }}" class="card-img-top">
