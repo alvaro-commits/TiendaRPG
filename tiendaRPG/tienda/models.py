@@ -64,8 +64,6 @@ class Accesorio(models.Model):
     urlImagen = models.CharField(max_length=2083)
 
 
-class Perfil_Accesorio(models.Model):
-    accesorio = models.ForeignKey(Accesorio, on_delete=models.DO_NOTHING)
 
 class Recompensa(models.Model):
     descuento = models.FloatField(default=0)
@@ -76,10 +74,10 @@ class Recompensa(models.Model):
 class Perfil(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     clase = models.ForeignKey(Clase_Personaje, on_delete=models.DO_NOTHING,null=True,blank=True)
-    recompensa= models.ManyToManyField(Recompensa)
+    recompensa= models.ManyToManyField(Recompensa, null = True,blank = True)
     victorias = models.IntegerField(default=0)
     derrotas = models.IntegerField(default=0)
-    accesorios = models.ManyToManyField(Perfil_Accesorio)
+    accesorios = models.ManyToManyField(Accesorio, null = True,blank = True)
     total_puntos = models.FloatField(default=0)
     def __str__(self):
         return self.usuario.username
