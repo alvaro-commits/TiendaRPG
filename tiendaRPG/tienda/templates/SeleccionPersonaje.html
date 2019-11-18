@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container relativo" style="background: white; width: auto;  align-items: center;">
+    <br>
+    <h2 style="text-align: center;">Bienvendio {{perfil.usuario.username}}</h2>
+    <hr>
+    <h3 style="text-align: center;">Parece que es tu primera vez aqui, por favor elige un personaje.</h3>
+    <br>
+    <h2 style="text-align: center;">Selección de personajes</h2>
+    {%for clase in clases %}
+    <div class="bloque-horizontal contenedorClase" >
+        <h2 style="text-align: center;">{{clase.nombre}}</h2>
+        <div class="imgClase" style="height: 350px; width: 250px;">
+            <img src="{{clase.urlImagen}}" alt="clase.nombre" style="height: 100%; width: 100%; border: 3px solid brown;border-radius: 15%;">
+        </div>
+        <div class="descripClase" > 
+            <p>Vida:    {{clase.vida_base}} <img src="../static/img/1-dark-heart-png-image-download.png" style="height: 14%; width: 14%; margin-bottom: 5%;"></p>
+            <p>daño:    {{clase.daño_base}} <img src="../static/img/24177-7-katana.png" style="height: 14%; width: 14%; margin-bottom: 5%;"></p>
+            <p>defensa: {{clase.defensa_base}} <img src="../static/img/7-silver-metal-shield-png-image.png" style="height: 14%; width: 14%; margin-bottom: 5%;"></p>
+            <a href="{% url 'tienda:asignarClaseAPersonaje' clase.id %}"  style="margin-left: 30%;" ><img src="../static/img/33559-5-sword-shield-transparent-background.png" style="height: 30%; width: 35%; margin-bottom: 5%;"></a>
+        </div>
+    </div>
+    {% endfor %}
+    <hr>
+    <p><strong>¡Atención!</strong> Al elegir un personaje no podrás cambiarlo hasta el termino de temporada. Escoge sabiamente.</p>
+    <hr>
+    {% endblock %}

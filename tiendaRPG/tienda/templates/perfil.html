@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="background: white; padding: 5%; ">
+    <br>
+    <h1 style="text-align: center;"> Mi perfil</h1>
+    <hr>
+    <div style="padding-left: 15%;">
+        <div class="bloque-horizontal" style="background-color: lightskyblue; height: 600px; width: 210px; padding: 0%;">
+            <div style="background-color:lightslategrey; height: 165px; width: 165px; margin: 10%;"></div>
+            <div style="background-color:lightslategrey; height: 165px; width: 165px; margin: 10%;"></div>
+            <div style="background-color:lightslategrey; height: 165px; width: 165px; margin: 10%;"></div>
+        </div>
+        <div class="imgClase bloque-horizontal" style="height: 350px; width: 250px;">
+            <img src="{{perfil.clase.urlImagen}}" alt="clase.nombre"
+                style="height: 100%; width: 100%; border: 3px solid brown;border-radius: 15%;">
+        </div>
+        <div class="bloque-horizontal" style="background-color: lightskyblue; height: 600px; width: 210px;">
+            <div style="background-color:lightslategrey; height: 165px; width: 165px; margin: 10%;"></div>
+            <div style="background-color:lightslategrey; height: 165px; width: 165px; margin: 10%;"></div>
+            <div style="background-color:lightslategrey; height: 165px; width: 165px; margin: 10%;"></div>
+        </div>
+    </div>
+    <hr>
+    <p><strong>Victorias con mi <span style="text-transform: lowercase;">{{perfil.clase.nombre}}:</span> </strong>
+        {{perfil.victorias}}</p>
+    <p><strong>Derrotas que sufrio mi <span style="text-transform: lowercase;">{{perfil.clase.nombre}}:</span> </strong>
+        {{perfil.victorias}}</p>
+    <p><strong>K/D de mi <span style="text-transform: lowercase;">{{perfil.clase.nombre}}:</span> </strong> {{kda}}</p>
+    <hr>
+    <p><strong>Mis puntos: </strong> {{perfil.total_puntos}}</p>
+    <hr>
+    <h1 style="text-align: center;"> Accesorios</h1>
+    <h2> Cascos</h2>
+    <h1>{{accesorio_equipado}}</h1>
+    {% for equipo in accesorio_equipado.all %}
+    <p>{{equipo.accesorio.tier}}</p>
+    <h1>asdads</h1>
+    {% endfor %}
+    <h2> Petos</h2>
+    <h2> Manoplas</h2>
+    <h2> Pantalones</h2>
+    <h2> Grebas</h2>
+    <h2> Anillos</h2>
+</div>
+
+{% endblock%}
