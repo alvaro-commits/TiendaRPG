@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container" style="background: white; padding: 0%;">
+
+<div class="container" style="background: white; padding: 0%; ">
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" style="height: 600px; width: 100%;">
+        <div class="carousel-inner" style="height: auto; width: 100%;">
             <div class="carousel-item active" data-interval="10000">
                 <img src="https://myandroidschool.files.wordpress.com/2015/02/cute_fall_welcome_cmn-hd.jpg"
                     style="max-height:690px " class="d-block w-100" alt="...">
@@ -17,90 +18,84 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
-        <div class="container ">
-            <br>
-            <div class="row">
-                <div class="container center">
-
-                    <h2 class="black-text">Usuarios Destacados</h2>
-                    <hr>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m6">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col s12 l6">
-                                <h4>MaxxPro61</h4>
-                                <p>
-                                    <strong>Puntos:</strong> 40000 <br>
-                                    <strong>Clase :</strong> : Diamante <br>
-                                    <strong>Nivel :</strong> Nivel: 53 <br>
-                                    <strong>Ranking Nacional</strong> Puesto 3 <br>
-
-                                </p>
-                            </div>
-                            <div class="col s12 l6">
-                                <img src="https://i.pinimg.com/originals/87/cd/98/87cd989f6a96db5f70cef07576ed0c11.png"
-                                    width="100%" height="auto" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col s12 m6">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col s12 l6">
-                                <h4>Elcrack777</h4>
-                                <p>
-                                    <strong>Puntos:</strong> 40000 <br>
-                                    <strong>Clase :</strong> : Diamante <br>
-                                    <strong>Nivel :</strong> Nivel: 53 <br>
-                                    <strong>Ranking Nacional</strong> Puesto 3 <br>
-
-                                </p>
-                            </div>
-                            <div class="col s12 l6">
-                                <img src="https://i.pinimg.com/originals/2e/fa/3e/2efa3e24e3092eb652be2b64939e0ea5.png"
-                                    width="100%" height="auto" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="green darken-2">
-
-
-        <div class="row container">
-            <br>
-            <div class="container center">
-                <h3 class="white-text container">Productos</h3>
-                <br>
-            </div>
-            <hr>
-            <!-- productos -->
-
-            <div class="row">
-                {% for producto in object_list %} 
-                <div class="col-sm-4 d-flex pb-3 ">
-                    <div class="card card-block" style="width: 18rem">
-                        <img src="{{ producto.urlImagen }}" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ producto.nombreProducto }} $({{producto.precio}}) </h5>
-                            <p class="card-text">{{ producto.descripcion }} </p>
-                            <p><strong style="font-size: 20px;">Puntos: ({{producto.puntos}})</strong></p>
-                            <a href="#" class="btn btn-primary">Añadir al carro</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
     </div>
 </div>
+<div class="container" style="background: white ; ">
+    <div class="container ">
+        <div class="row">
+            <div class="container center">
+
+                <h2 class="black-text">Usuarios Destacados</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l6">
+                            <h4>MaxxPro61</h4>
+                            <p>
+                                <strong>Puntos:</strong> 40000 <br>
+                                <strong>Clase :</strong> : Diamante <br>
+                                <strong>Nivel :</strong> Nivel: 53 <br>
+                                <strong>Ranking Nacional</strong> Puesto 3 <br>
+
+                            </p>
+                        </div>
+                        <div class="col s12 l6">
+                            <img src="https://i.pinimg.com/originals/87/cd/98/87cd989f6a96db5f70cef07576ed0c11.png"
+                                width="100%" height="auto" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l6">
+                            <h4>Elcrack777</h4>
+                            <p>
+                                <strong>Puntos:</strong> 40000 <br>
+                                <strong>Clase :</strong> : Diamante <br>
+                                <strong>Nivel :</strong> Nivel: 53 <br>
+                                <strong>Ranking Nacional</strong> Puesto 3 <br>
+
+                            </p>
+                        </div>
+                        <div class="col s12 l6">
+                            <img src="https://i.pinimg.com/originals/2e/fa/3e/2efa3e24e3092eb652be2b64939e0ea5.png"
+                                width="100%" height="auto" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h3 class="container" style="text-align: center;" style="position: relative;">Productos</h3>
+    <br>
+    <!-- productos -->
+    <div class="row menu-row " style="padding: 0%;">
+        {% for producto in object_list %}
+        <div class=" col-xs-12 col-sm-6 col-md-3" style="margin-bottom: 30px;">
+            <div class="card producto" style=" width: 16rem; ">
+                <img src="{{ producto.urlImagen }}" class="card-img-top" alt="...">
+                <div class="card-body" style="position: relative;">
+                    <div style="padding-bottom: 15px;">
+                        <h5 class="card-title">{{ producto.nombreProducto }} $({{producto.precio}}) </h5>
+                        <p class="card-text">{{ producto.descripcion }}</p>
+                        <p><strong style="font-size: 20px;">Puntos: ({{producto.puntos}})</strong></p>
+                    </div>
+                    <a href="{% url 'tienda:añadir_al_carro' producto.codigo_producto %}"
+                        class="btn btn-primary btnProducto">Añadir al carro</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
 {% endblock %}

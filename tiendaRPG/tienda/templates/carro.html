@@ -1,77 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-2 col-xs-5 col-sm-3" producto>
-        <div class="producto">
-            <img src="img/tele.jpg" class="" alt="item">
+<div class="container" style="background: white; padding: 0%;">
+    <h1 style="text-align: center;">Carro de compras</h1>
+    <br>
+    <hr>
+    {% if not itemscarro.all%}
+    <div style="height: 500px;">
+        <div class="centro">
+            <div>
+                <h2>No tienes items en tu carro </h2>
+                <a href="/">volver al menu.</a>
+            </div>
+            <img class="limitadoAcontenedor imagen150x150"
+                src="https://cdn.dribbble.com/users/204955/screenshots/4930541/emptycart.png" alt="" srcset="">
+        </div>
+
+    </div>
+    {%else%}
+    <div>
+        <div class="bloque-horizontal" style="width: 70%;">
+            {% for item in itemscarro.all%}
+            <div class="row carro-row ">
+                <div class="col-md-2 col-xs-1 col-sm-1 producto">
+                    <div class="producto">
+                        <img src="{{ item.producto.urlImagen }}" class="card-img-top imagen125x125" alt="item">
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-1 col-sm-1 producto">
+                    <label>Nombre Producto</label>
+                    <p>{{ item.producto.nombreProducto }}</p>
+                </div>
+                <div class="col-md-2 col-xs-1 col-sm-1 producto">
+                    <label>Recompensa puntos:</label>
+                    <label>{{ item.producto.puntos }}</label>
+                </div>
+                <div class="col-md-2 col-xs-1 col-sm-1 producto">
+                    <label>Precio: ${{ item.producto.precio }}</label>
+                </div>
+                <div class="col-md-2 col-xs-1 col-sm-1 producto">
+                    <a href="{% url 'tienda:eliminar_item_carro' item.id %}" class="btn btn-link btn-xs">Cancelar</a>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+        <div class="bloque-horizontal pegajoso-abajo"
+            style=" position: sticky; top: 20%; border-left: 8px solid rebeccapurple; margin-bottom: 30px;">
+            <h4>Precio total: ${{carro.preciototal}}</h4>
+            <h4>Puntos totales: {{carro.totalpuntos}}</h4>
+            <a href="{% url 'tienda:realizarcompra'    %}" class="btn btn-link btn-xs">Realizar compra</a>
+            <br>
+            <br>
+            <a href="/" class="btn btn-link btn-xs">Seguir comprando!</a>
         </div>
     </div>
-    <div class="col-md-2 col-xs-5 col-sm-3 producto">
-        <label>Nombre Producto</label>
-        <p>Descripción producto</p>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-2 producto">
-        <label>Recompensa puntos:</label>
-        <label>50000</label>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-3 producto">
-        <label>Precio: $300.000</label>
-    </div>
-    <div class="col-md-2 col-xs-1 col-sm-1 producto">
-        <button type="button" class="btn btn-link btn-xs">
-            <i class="material-icons">delete</i>
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-md-2 col-xs-5 col-sm-3" producto>
-        <div class="producto">
-            <img src="img/tele.jpg" class="" alt="item">
-        </div>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-3 producto">
-        <label>Nombre Producto</label>
-        <p>Descripción producto</p>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-2 producto">
-        <label>Recompensa puntos:</label>
-        <label>50000</label>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-3 producto">
-        <label>Precio: $300.000</label>
-    </div>
-    <div class="col-md-2 col-xs-1 col-sm-1 producto">
-        <button type="button" class="btn btn-link btn-xs">
-            <i class="material-icons">delete</i>
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-md-2 col-xs-5 col-sm-3" producto>
-        <div class="producto">
-            <img src="img/tele.jpg" class="" alt="item">
-        </div>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-3 producto">
-        <label>Nombre Producto</label>
-        <p>Descripción producto</p>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-2 producto">
-        <label>Recompensa puntos:</label>
-        <label>50000</label>
-    </div>
-    <div class="col-md-2 col-xs-5 col-sm-3 producto">
-        <label>Precio: $300.000</label>
-    </div>
-    <div class="col-md-2 col-xs-1 col-sm-1 producto">
-        <button type="button" class="btn btn-link btn-xs">
-            <i class="material-icons">delete</i>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <button type="submit" class="btn btn-primary derecha">Comprar</button>
-    </div>
+    {% endif %}
 </div>
 {% endblock %}
