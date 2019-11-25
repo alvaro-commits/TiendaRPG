@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container relativo" style="background: white; width: auto;">
+    <h2 style="text-align: center;">Lucha por descuentos!</h2>
+    <div class="contenedorJuego relativo">
+        <div class="BarraInfoJugador">
+            <h4 style="font-family: monospace; margin-bottom: 0%; margin-top: 8px;">{{perfil.usuario.username}}
+                {{clase.nombre}}</h4>
+            <div class="contenedorBarravida">
+                <div class="barravida bloque-horizontal">
+                    <div class="vida"></div>
+                </div>
+                100/100
+            </div>
+        </div>
+        <div class="BarraInfoEnemigo">
+            <h4 style="font-family: monospace; margin-bottom: 0%; margin-top: 8px;">{{enemigo.nombre}} nivel
+                {{enemigo.nivel}}</h4>
+            <div class="contenedorBarravida">
+                <div class="barravida bloque-horizontal">
+                    <div class="vida"></div>
+                </div>
+                <p id="demo">100/100</p>  
+            </div>
+        </div>
+        <div class="contenedorJugador">
+            <img src="{{clase.urlImagen}}" alt="">
+        </div>
+        <div class="contenedorEnemigo">
+            <img src="{{enemigo.imagen}}" alt="">
+        </div>
+        <div class="MenuJugador">
+            <div style="background-color: blue; height: 100%; width: 50%;">
+                <button href="" class="accion" onclick="atacar()">Atacar</button>
+                    <button class="accion">Defenderse</button>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<script>
+    function atacar(daño_realizado, vida_enemigo){
+        var xhttp = new XMLHttpRequest
+        return vida_enemigo - daño_realizado
+    }
+    document.getElementById("demo").innerHTML = atacar({{perfil.daño_total}},{{enemigo.vida}})
+</script>
+{% endblock %}

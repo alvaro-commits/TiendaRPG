@@ -1,6 +1,7 @@
 {% extends '../base.html' %}
 
 {% block content %}
+
 <form class="caja" id="formulario" method="post">
     {% csrf_token %}
     <img src="../../static/img/logoXd.png" class="logo" alt="logo">
@@ -20,6 +21,7 @@
     {% endif %}
     <small class="text-muted" style="font-size: 18px;">
         ¿No tienes una cuenta? <a href="/registro" class="a-c">Crea una cuenta ahora</a>
+        <br>  ¿Has olvidado tu contraseña? <a href="/password-reset">Recuperar contraseña</a>
     </small>
 </form>
 {% endblock %}

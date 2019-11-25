@@ -13,5 +13,6 @@ admin.site.register(m.Recompensa),
 admin.site.register(m.Clase_Personaje),
 admin.site.register(m.Accesorio),
 admin.site.register(m.carro),
+admin.site.register(m.Enemigo),
 admin.site.register(m.CarroProducto),
 admin.site.register(m.Productos,ProductosAdmin)

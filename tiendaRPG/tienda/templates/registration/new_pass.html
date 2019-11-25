@@ -1,0 +1,15 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<form class="caja" id="formulario" method="post">
+    {% csrf_token %}
+    <h2>Ingresa tu nueva contraseña</h2>
+    <hr>
+    <p style="text-align: center;">¡Confirmala para que no se te olvide!</p>
+    <div class=contenedorTexto>
+    <input type="password" name="new_password1" placeholder="Contraseña">
+    <input type="password" name="new_password2" placeholder="Confirmar contraseña">
+    <input type="submit" value="Cambiar mi contraseña">
+    </div>
+</form>
+{% endblock %}

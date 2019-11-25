@@ -58,12 +58,12 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item active">
                     <form>
-                        <a class="nav-link" href="#">Perfil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/perfil">Perfil <span class="sr-only">(current)</span></a>
                     </form>
                 </li>
                 <li class="nav-item active">
                     <form>
-                        <a class="nav-link" href="#">Juega ahora! <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/juego">Juega ahora! <span class="sr-only">(current)</span></a>
                     </form>
                 </li>
                 <li class="nav-item active">
@@ -86,11 +86,12 @@
                 {% endif %}
         </div>
     </nav>
+    <div  style="position: relative; height: 700px; display: block;">
     {% block content %}
 
 
     {% endblock %}
-
+    </div>
     <!-- JavaScript -->
     <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
     <script src="{% static 'js/jquery.validate.js' %}"></script>

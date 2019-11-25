@@ -69,16 +69,28 @@ class Recompensa(models.Model):
     descuento = models.FloatField(default=0)
     Producto = models.ForeignKey(Productos, on_delete=models.DO_NOTHING)
 
+class Enemigo(models.Model):
+    nivel = models.IntegerField()
+    nombre = models.CharField(max_length=150)
+    vida = models.IntegerField()
+    daño = models.FloatField()
+    defensa = models.FloatField()
+    imagen = models.CharField(max_length=2083)
+
 
 
 class Perfil(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     clase = models.ForeignKey(Clase_Personaje, on_delete=models.DO_NOTHING,null=True,blank=True)
-    recompensa= models.ManyToManyField(Recompensa, null = True,blank = True)
+    vida_total = models.IntegerField(default=0)
+    daño_total = models.FloatField(default=0)
+    defensa_total = models.FloatField(default=0)
+    recompensa= models.ManyToManyField(Recompensa,blank = True)
     victorias = models.IntegerField(default=0)
     derrotas = models.IntegerField(default=0)
-    accesorios = models.ManyToManyField(Accesorio, null = True,blank = True)
+    accesorios = models.ManyToManyField(Accesorio,blank = True)
     total_puntos = models.FloatField(default=0)
+    #enemigo_asignado = models.ForeignKey(Enemigo, on_delete=models.DO_NOTHING,blank=True)
     def __str__(self):
         return self.usuario.username
 

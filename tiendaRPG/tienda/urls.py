@@ -9,6 +9,8 @@ urlpatterns = [
     path('carro/',views.Vistacarro, name ='/carro'),
     
     path('perfil/',views.vistaperfil, name ='perfil'),
+    path('juego/',views.vistajuego, name ='juego'),
+    path('comprarAccesorio/<int:accesorio_id>',views.comprarAccesorio, name ='comprarAccesorio'),
     path('seleccionPersonaje/',views.seleccionPersonaje, name ='seleccionPersonaje'),
     path('realizar_compra',views.realizarcompra, name ='realizarcompra'),
     path('seleccionPersonaje/(<int:id>),',views.asignarClaseAPersonaje, name ='asignarClaseAPersonaje'),
@@ -16,6 +18,10 @@ urlpatterns = [
     path('eliminar_item_carro/(<int:item_id>),',views.eliminar_item_carro, name ='eliminar_item_carro'),
     path('registro/',views.registro, name = 'registro'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout')
+    path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html'), name='password_reset'),
+    path('accounts/password_reset/done/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_enviado.html'), name='password_reset'),
+    path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/new_pass.html'), name='new_password'),
+    path('accounts/reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_completo.html'), name='password_done')
 
 ]
