@@ -14,6 +14,6 @@ class PruebaProducto(TestCase):
     def test_asignacion_descuento(self):
         recompensa = mod.Recompensa.objects.get(nivel = 5)
         self.assertEqual(recompensa.obtenerNuevoPrecio(),500)   
-        print(F"El nuevo precio aplicando el descuento es : "+str(recompensa.obtenerNuevoPrecio()))
+        print(F"El nuevo precio aplicado al descuento es : "+str(recompensa.obtenerNuevoPrecio()))
 
 
