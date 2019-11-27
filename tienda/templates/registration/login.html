@@ -1,0 +1,27 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+<form class="caja" id="formulario" method="post">
+    {% csrf_token %}
+    <img src="../../static/img/logoXd.png" class="logo" alt="logo">
+    <h1>Login</h1>
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{message}}</span></p>
+    {% endfor %}
+    {% endif %}
+    <div class=contenedorTexto>
+    <input type="text" name="username" placeholder="Usuario">
+    <input type="password" name="password" placeholder="Contraseña">
+    <input type="submit" value="login">
+    </div>
+    {% if form.errors %}
+    <p>Tu usuario o contraseña son incorrectos.</p>
+    {% endif %}
+    <small class="text-muted" style="font-size: 18px;">
+        ¿No tienes una cuenta? <a href="/registro" class="a-c">Crea una cuenta ahora</a>
+        <br>  ¿Has olvidado tu contraseña? <a href="/password-reset">Recuperar contraseña</a>
+    </small>
+</form>
+{% endblock %}

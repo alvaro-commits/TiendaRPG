@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container relativo" style="background: white; width: auto;">
+<br>
+<h1 style="text-align: center;">Felicidades has ganado!</h2>
+<hr>
+<h2 style="text-align: center;">Has ganado un descuento para: ¡{{producto.nombreProducto}}! de un {{descuento}}%</h2>
+<br>
+<div class=" col-xs-12 col-sm-6 col-md-3" style="margin-bottom: 30px; margin-left: 30%;">
+        <div class="card producto" style=" width: 16rem; ">
+            <img src="{{ producto.urlImagen }}" class="card-img-top" alt="...">
+            <div class="card-body" style="position: relative;">
+                <div style="padding-bottom: 15px;">
+                    <h5 class="card-title">{{ producto.nombreProducto }} <del style="font-size: 15px;">$({{producto.precio}})<del> </h5>
+                    <h5 class="card-title">Precio ahora: ${{nuevoPrecio}} </h5>
+                    <p class="card-text">{{ producto.descripcion }}</p>
+                    <p><strong style="font-size: 20px;">Puntos: ({{producto.puntos}})</strong></p>
+                </div>
+                <a href="{% url 'tienda:añadir_al_carro' producto.codigo_producto %}"
+                    class="btn btn-primary btnProducto">Añadir al carro</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
