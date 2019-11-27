@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container relativo" style="background: white; width: auto;">
+<br>
+<h2 style="text-align: center;">Datos del pedido</h2>
+<br>
+<div class="container relativo" style="padding: 0%;">
+    <div class="row bloque-horizontal container" style="width: 450px; margin-left: 5%; margin-top: 3%; ">
+        <div class="row">
+            <div class="col">
+                <p>Número del pedido:</p>
+            </div>
+            <div class="col">
+                <p>{{carro.id}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p>Fecha de compra:</p>
+            </div>
+            <div class="col">
+                <p>{{carro.fechaVenta}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p>Valor total del pedido:</p>
+            </div>
+            <div class="col">
+                <p>{{carro.preciototal}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p>Cuenta del cliente:</p>
+            </div>
+            <div class="col">
+                <p>{{carro.usuario.username}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p>Forma de pago:</p>
+            </div>
+            <div class="col " style="max-height: 70px;">
+                <img src="https://www.transbank.cl/web/images/1476462548920?blobnocache=true" alt="RedCompra" style="max-width: 100%; height: 100%;">
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="separador"></div>
+    <div class=" bloque-horizontal" style="margin-left: 5%; margin-top: 3%;">
+        <h4>¡Pedido Realizado con éxito!</h4>
+        <br>
+        <p>¡Su compra ha finalizado correctamente, pero espera aún hay más! </p>
+        <pre>
+Has acumulado {{carro.totalpuntos}} puntos! Utilízalos para mejorar tu personaje, 
+jugar y ganar jugosos descuentos en tus próximas compras!
+        </pre>
+        <a href="/seleccionPersonaje">Ir a mi perfil</a>
+    </div>
+</div>
+</div>
+{% endblock %}

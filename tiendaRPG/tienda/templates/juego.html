@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container relativo" style="background: white; width: auto;">
+    <h2 style="text-align: center;">Lucha por descuentos!</h2>
+    <div class="contenedorJuego relativo">
+        <div class="BarraInfoJugador">
+            <h4 style="font-family: monospace; margin-bottom: 0%; margin-top: 8px; color: gold;">{{perfil.usuario.username}}
+                {{clase.nombre}}</h4>
+            <div class="contenedorBarravida">
+                <div class="barravida bloque-horizontal">
+                    <div id="jugadorVida"></div>
+                </div >
+                <div class="bloque-horizontal">
+                    <p style="font-size: 13px; margin-top: 5px;"><span id="vidaJugador">{{perfil.vida_total}}</span>  /{{perfil.vida_total}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="BarraInfoEnemigo">
+            <h4 style="font-family: monospace; margin-bottom: 0%; margin-top: 8px; color: gold;">{{enemigo.nombre}} nivel
+                {{enemigo.nivel}}</h4>
+            <div class="contenedorBarravida">
+                <div class="barravida bloque-horizontal">
+                    <div id="vida"></div>
+                </div>
+                <div class="bloque-horizontal">
+                    <p style="font-size: 13px; margin-top: 5px;"><span id="vidaEnemigo">{{SeleccionEnemigo.vida}}</span>  /{{SeleccionEnemigo.vida}}</p>
+                </div>
+                
+            </div>
+        </div>
+        <div class="contenedorJugador">
+            <img src="{{clase.urlImagen}}" alt="">
+            <div id="ju"></div>
+        </div>
+        <div class="contenedorEnemigo" id="divEnemigo">
+            <img src="{{enemigo.imagen}}" alt="">
+            <div id="ka"></div>
+        </div>
+        <div class="MenuJugador">
+            <div class="contenedorAcciones">
+                <img class="accion btnAtacar" src="../static/img/33559-5-sword-shield-transparent-background.png">
+               <div class="Posiones bloque-horizontal" id="contenedorPosionesVida"style="width: 240px;">
+                <p style="font-size: 12px; color: white; margin: 0%;">Posiones de vida</p>
+                {%for posionVida in posionesVida %}
+                <div class="card bloque-horizontal" style="width: 45px; height: 45px; margin-right: 2%; position: relative;">
+                    <a class="PosionVida"><img src="{{posionVida.posion.imagen}}"
+                            class="card-img-top limitadoAcontenedor"></a>
+                    <div class="card-body sinMargen">
+                        <h6 class="card-title" style="margin: 0; text-align: center; font-size: 9px;">{{posionVida.nombre}}</h6>
+                        <p style="color: white; font-size: 10px;">Vida: {{posionVida.posion.vida}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <p style="font-size: 12px; color: white; margin: 0%; padding-top: 15px;">Posiones de daño</p>
+                {%for posionDaño in posionesDaño %}
+                <div class="card bloque-horizontal" style="width: 45px; height: 45px; margin-right: 2%; position: relative;">
+                    <a class="PosionDaño"><img src="{{posionDaño.posion.imagen}}"
+                            class="card-img-top limitadoAcontenedor"></a>
+                    <div class="card-body sinMargen">
+                        <h6 class="card-title" style="margin: 0; text-align: center; font-size: 9px;">{{posionDaño.nombre}}</h6>
+                        <p style="color: white; font-size: 10px; width: 60px;">Daño: {{posionDaño.posion.daño}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+               </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<script src="../static/js/jquery-3.4.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$( document ).ready(function() {
+    var contador = 0;
+    $('body').on('click','.btnAtacar', function () {
+        var vida_total = {{ enemigo.vida }} - {{ perfil.daño_total }};
+    contador++;
+    $.ajax({
+
+        type: 'GET',
+        url: '/atacar/',
+        cache: false,
+        success: function(data){
+            document.getElementById("vidaEnemigo").innerHTML = (data);
+            vida = (data*100)/({{SeleccionEnemigo.vida}})
+            document.getElementById("vida").style.width = vida+"%";
+            var div = document.getElementById('ka');
+            document.getElementById("ka").style.display = 'inline';
+            div.innerHTML += '<img id="k" class="sangre" src="../static/img/sangre.png" alt="">';
+            window.setTimeout("document.getElementById('ka').style.display='none';", 200)
+            var div = document.getElementById('ju');
+            document.getElementById("ju").style.display = 'inline';
+            div.innerHTML += '<img id="j" class="sangre" src="http://bestanimations.com/Music/Notation/large-green-blue-music-notes.gif" alt="">';
+            window.setTimeout("document.getElementById('ju').style.display='none';", 200)
+            if(data <= 0){
+                 var url= "/ganaste!"; 
+                 window.location = url; 
+            }
+                
+            
+            
+        }
+    })
+    
+        });
+
+});
+   
+</script>
+<script>
+$( document ).ready(function() {
+    var contador = 0;
+    $('body').on('click','.btnAtacar', function () {
+    $.ajax({
+
+        type: 'GET',
+        url: '/ataqueEnemigo/',
+        cache: false,
+        success: function(data){
+            document.getElementById("vidaJugador").innerHTML = (data);
+            vida = (data*100)/({{perfil.vida_actual}})
+            document.getElementById("jugadorVida").style.width = vida+"%";
+            
+        }
+    })
+    
+        });
+
+});
+       
+</script>
+<script>
+    $( document ).ready(function() {
+        var contador = 0;
+        $('body').on('click','.PosionVida', function () {
+        $.ajax({
+    
+            type: 'GET',
+            url: '/usarPosionVida/',
+            cache: false,
+            success: function(data){
+                document.getElementById("vidaJugador").innerHTML = (data);
+                vida = (data*100)/({{perfil.vida_actual}})
+                document.getElementById("jugadorVida").style.width = vida+"%";
+                $("#contenedorPosionesVida").load(" #contenedorPosionesVida")
+            }
+        })
+        
+            });
+    
+    });
+           
+    </script>
+
+<script>
+    $( document ).ready(function() {
+        var contador = 0;
+        $('body').on('click','.PosionDaño', function () {
+        $.ajax({
+    
+            type: 'GET',
+            url: '/usarPosionDaño/',
+            cache: false,
+            success: function(data){
+                $("#contenedorPosionesVida").load(" #contenedorPosionesVida")
+            }
+
+            
+        })
+        
+            });
+    
+    });
+           
+    </script>
+{% endblock %}

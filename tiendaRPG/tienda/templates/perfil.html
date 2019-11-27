@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="background: white; padding: 5%; ">
+    <br>
+    <h1 style="text-align: center;"> Mi perfil</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <p{% if message.tags %} class="alert alert-{{ message.tags }}" role="alert" {% endif %}>{{ message }}</p>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <hr>
+    <div style="padding-left: 15%; ">
+        <div class="bloque-horizontal accesorios_equipados">
+            <div style="height: 180px; position: relative;">
+                <p>{{casco_equipado.nombre}}</p>
+                <img style="position: absolute; bottom: 0%; right: 20%;" class="producto imagen125x125 bordeVisible"
+                    src="{{casco_equipado.urlImagen}}" alt="">
+            </div>
+            <img style="height: 25px; width: 100%;" src="../static/img/linea_2.png">
+            <div style="height: 180px; position: relative; ">
+                <p>{{peto_equipado.nombre}}</p>
+                <img style="position: absolute; bottom: 0%; right: 20%;" class="producto imagen125x125 bordeVisible"
+                    src="{{peto_equipado.urlImagen}}" alt="">
+            </div>
+            <img style="height: 25px; width: 100%;" src="../static/img/linea_2.png">
+            <div style="height: 180px; position: relative;">
+                <p>{{manoplas_equipadas.nombre}}</p>
+                <img style="position: absolute; bottom: 0%; right: 20%;" class="producto imagen125x125 bordeVisible"
+                    src="{{manoplas_equipadas.urlImagen}}" alt="">
+            </div>
+
+        </div>
+        <div class="imgClase bloque-horizontal" style="height: auto; width: 250px; ">
+            <div>
+                <img src=" {{perfil.clase.urlImagen}}" alt="clase.nombre"
+                    style="height: 100%; width: 100%; border: 3px solid gold;">
+            </div>
+            <div style=" height: auto;  width: 250px; margin: 0%; padding-top: 8%;">
+                <h2 style="text-align: center;">Stats</h2>
+                <img style="height: 25px; width: 100%;" src="../static/img/linea_3.png">
+                <h4 style="text-align: center;">Vida total: {{perfil.vida_total}}</h4>
+                <h4 style="text-align: center;">Daño total: {{perfil.daño_total}}</h4>
+                <h4 style="text-align: center;">Defensa total: {{perfil.defensa_total}}</h4>
+            </div>
+        </div>
+        <div class="bloque-horizontal accesorios_equipados">
+            <div style="height: 180px; position: relative;">
+                <p>{{pantalones_equipados.nombre}}</p>
+                <img style="position: absolute; bottom: 0%; right: 20%;" class="producto imagen125x125 bordeVisible"
+                    src="{{pantalones_equipados.urlImagen}}" alt="">
+            </div>
+            <img style="height: 25px; width: 100%;" src="../static/img/linea_2.png">
+            <div style="height: 180px; position: relative;">
+                <p>{{grebas_equipadas.nombre}}</p><img style="position: absolute; bottom: 0%; right: 20%;"
+                    class="producto imagen125x125 bordeVisible" src="{{grebas_equipadas.urlImagen}}" alt="">
+            </div>
+            <img style="height: 25px; width: 100%;" src="../static/img/linea_2.png">
+            <div style="height: 180px; position: relative;">
+                <p>{{anillo_equipado.nombre}}</p>
+                <img style="position: absolute; bottom: 0%; right: 20%;" class="producto imagen125x125 bordeVisible"
+                    src="{{anillo_equipado.urlImagen}}" alt="">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p><strong>Victorias con mi <span style="text-transform: lowercase;">{{perfil.clase.nombre}}:</span> </strong>
+        {{perfil.victorias}}</p>
+    <p><strong>Derrotas que sufrio mi <span style="text-transform: lowercase;">{{perfil.clase.nombre}}:</span> </strong>
+        {{perfil.victorias}}</p>
+    <p><strong>K/D de mi <span style="text-transform: lowercase;">{{perfil.clase.nombre}}:</span> </strong> {{kda}}</p>
+    <hr>
+    <p><strong>Mis puntos: </strong> {{perfil.total_puntos}}</p>
+    <hr>
+    <h2>Pócimas magicas</h2>
+    <p>Maximo 3 de cada tipo.</p>
+    <p>Tienes: {{posionesTotalesVida}} pócima de vida</p>
+    <p>Tienes: {{posionesTotalesDaño}} pócima de daño</p>
+    {%for accesorio in posiones %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        <a href="{% url 'tienda:comprarPosion' accesorio.id %}"><img src="{{accesorio.imagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida}}</p>
+            <p>Daño: {{accesorio.daño}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+    <h1 > Accesorios</h1>
+    <h2> Cascos</h2>
+    {%for accesorio in cascos %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        {% if casco_equipado.tier >= accesorio.tier %}
+        <div style="position: absolute; height: 100%; width: 100%; background: green; opacity: 0.5;"><p style=" margin-top: 40px; color: white; transform: rotate(-45deg);">Mejora superada</p></div>
+        {%endif%}
+        <a href="{% url 'tienda:comprarAccesorio' accesorio.id %}"><img src="{{accesorio.urlImagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida_extra}}</p>
+            <p>Daño: {{accesorio.daño_extra}}</p>
+            <p>Defensa: {{accesorio.defensa_extra}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo_puntos}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+    <h2> Petos</h2>
+    {%for accesorio in petos %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        {% if peto_equipado.tier >= accesorio.tier %}
+        <div style="position: absolute; height: 100%; width: 100%; background: green; opacity: 0.5;"><p style=" margin-top: 40px; color: white; transform: rotate(-45deg);">Mejora superada</p></div>
+        {%endif%}
+        <a href="{% url 'tienda:comprarAccesorio' accesorio.id %}"><img src="{{accesorio.urlImagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida_extra}}</p>
+            <p>Daño: {{accesorio.daño_extra}}</p>
+            <p>Defensa: {{accesorio.defensa_extra}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo_puntos}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+    <h2> Manoplas</h2>
+    {%for accesorio in manoplas %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        {% if manoplas_equipadas.tier >= accesorio.tier %}
+        <div style="position: absolute; height: 100%; width: 100%; background: green; opacity: 0.5;"><p style=" margin-top: 40px; color: white; transform: rotate(-45deg);">Mejora superada</p></div>
+        {%endif%}
+        <a href="{% url 'tienda:comprarAccesorio' accesorio.id %}"><img src="{{accesorio.urlImagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida_extra}}</p>
+            <p>Daño: {{accesorio.daño_extra}}</p>
+            <p>Defensa: {{accesorio.defensa_extra}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo_puntos}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+    <h2> Pantalones</h2>
+    {%for accesorio in pantalones %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        {% if pantalones_equipados.tier >= accesorio.tier %}
+        <div style="position: absolute; height: 100%; width: 100%; background: green; opacity: 0.5;"><p style=" margin-top: 40px; color: white; transform: rotate(-45deg);">Mejora superada</p></div>
+        {%endif%}
+        <a href="{% url 'tienda:comprarAccesorio' accesorio.id %}"><img src="{{accesorio.urlImagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida_extra}}</p>
+            <p>Daño: {{accesorio.daño_extra}}</p>
+            <p>Defensa: {{accesorio.defensa_extra}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo_puntos}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+    <h2> Grebas</h2>
+    {%for accesorio in grebas %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        {% if grebas_equipadas.tier >= accesorio.tier %}
+        <div style="position: absolute; height: 100%; width: 100%; background: green; opacity: 0.5;"><p style=" margin-top: 40px; color: white; transform: rotate(-45deg);">Mejora superada</p></div>
+        {%endif%}
+        <a href="{% url 'tienda:comprarAccesorio' accesorio.id %}"><img src="{{accesorio.urlImagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida_extra}}</p>
+            <p>Daño: {{accesorio.daño_extra}}</p>
+            <p>Defensa: {{accesorio.defensa_extra}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo_puntos}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+    <h2> Anillos</h2>
+    {%for accesorio in anillos %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        {% if anillo_equipado.tier >= accesorio.tier %}
+        <div style="position: absolute; height: 100%; width: 100%; background: green; opacity: 0.5;"><p style=" margin-top: 40px; color: white; transform: rotate(-45deg);">Mejora superada</p></div>
+        {%endif%}
+        <a href="{% url 'tienda:comprarAccesorio' accesorio.id %}"><img src="{{accesorio.urlImagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida_extra}}</p>
+            <p>Daño: {{accesorio.daño_extra}}</p>
+            <p>Defensa: {{accesorio.defensa_extra}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo_puntos}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock%}

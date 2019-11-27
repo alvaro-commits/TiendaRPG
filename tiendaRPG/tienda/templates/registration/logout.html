@@ -1,0 +1,13 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="caja">
+    {% csrf_token %}
+    <img src="../../static/img/logoXd.png" class="logo" alt="logo">
+    <h2>Has finalizado sesión. </h1>
+    <br>
+    <a href="/login">¿Deseas volver a ingresar?</a>
+
+
+</div>
+{% endblock %}

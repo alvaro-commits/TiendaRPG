@@ -1,0 +1,457 @@
+body.fondo{
+    margin: 0;
+    padding: 0;
+    background-image: url(../img/FondoVerdeCuadrados.jpg);
+}
+
+.col-contenedor{
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+}
+
+.colum {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+}
+
+::placeholder {
+    color:white;
+  }
+
+.items-nav{
+    position: relative;
+}
+.lista-nav{
+    position: absolute;
+    right: 1%;
+}
+.caja{
+
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #70294e;
+    border-radius: 24px;
+    color: white;
+}
+
+.caja input[type = "text"],.caja input[type = "password"]{
+    border:0;
+    background: none;
+    display: block;
+    margin:20px auto;
+    text-align: center;
+    border: 2px solid #b1dca3;  
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.caja input[type = "submit"],.registro button[type = "submit"]{
+    border:0;
+    background: none;
+    display: block;
+    margin:20px auto;
+    text-align: center;
+    border: 2px solid #3498db;  
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+
+}
+
+
+
+
+.caja input[type = "submit"]:hover{
+background-color: #3498db;
+}
+
+.contenedorTexto{
+    text-align: center;
+}
+.caja input[type = "text"]:focus,.caja input[type = "password"]:focus{
+    width: 250px;
+    border-color: #3498db;
+}
+
+.caja h1{
+    text-align: center;
+    color:white;
+    text-transform:  uppercase;
+    font-weight: 500;
+}
+
+
+footer{
+    background: rgb(28,214,70);
+background: linear-gradient(254deg, rgba(28,214,70,1) 0%, rgba(33,136,22,1) 50%, rgba(28,214,70,1) 100%);
+}
+
+.curvo{
+    border-radius: 30px;
+}
+
+.logo{
+width: 100px;
+height: 100px;
+border-radius: 50%;
+position: relative;
+left: calc(50% - 50px);
+}
+
+.navlogo{
+    top: 3px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+    left: calc(10% - 50px);
+    }
+.registro{
+    color: white;
+    font-size: 18px;
+    width: 550px;
+    position: absolute;
+    padding: 40px;
+    margin-top: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-40%);
+    background: #70294e;
+    border-radius: 24px;
+}
+
+.registro input[type = "text"],.registro input[type = "password"],.registro input[type = "email"]{
+
+    background: none;
+    border: 2px solid #b1dca3;  
+    outline: none;
+    color: white;
+}
+
+.registro input[type = "text"]:focus,.registro input[type = "password"]:focus,.registro input[type = "email"]:focus{
+    border: 2px solid #3498db; 
+}
+
+
+.registro h1{
+    text-align: center;
+    font-size: 25px;
+}
+
+
+.centrado{
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.centro{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+colorPrimarios{
+    background-color: #388e3c;
+}
+
+
+.carro h1{
+    text-align: center;
+}
+.producto {
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    
+}
+.limitadoAcontenedor{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.imagen125x125{
+    width: 125px;
+    height: 125px;
+}
+.imagen90x90{
+    width: 90px;
+    height: 90px;  
+}
+.imagen200x200{
+    width: 200px;
+    height: 200px;
+}
+
+.bloque-horizontal{
+    display: inline-block;
+    vertical-align:top;
+
+}
+
+.btnProducto{
+    position: absolute;
+    left: 25%;
+    bottom: 0%;
+}
+@media (max-width: 500px){
+    .carro-row{
+        margin-left: 40%;
+    }
+    .menu-row{
+        margin-left: 10px;
+    }
+    .pegajoso-abajo{
+        bottom: 0%;
+        background-color: white;
+        width: 80%;
+    }
+
+}
+
+.producto p{
+    font-size: 15px;
+    
+}
+@media (min-width: 1200px){
+.separador{
+    border-left: 4px solid rebeccapurple;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 46%;
+    }
+
+}
+.relativo{
+    position: relative;
+}
+
+.boton1{
+    background-color: #f44336;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    border: 2px solid brown;
+}
+.boton1:hover{
+    background-color: pink;
+}
+.derecha{
+    position: relative;
+}
+
+.contenedorClase{
+    background-color: green; 
+    margin: 2%;
+    padding: 1% 2% 2% 2%; 
+    color: white;
+    border: 3px solid brown;
+    width: 300.38px;
+    height: 435.28px;
+}
+
+.descripClase{
+    padding-left: 30%; 
+    width: 150px;
+    text-align: center;
+    font-size: 25px;
+    
+}
+.contenedorClase:hover  .imgClase{
+display: none;
+}
+
+
+.contenedorClase .descripClase{
+    display: none;
+    }
+
+
+.contenedorClase:hover .descripClase{
+    display: inline;
+    }
+
+.accesorios_equipados{
+    
+    height: 700px; width: 210px; 
+    padding: 0%; 
+    text-align: center; 
+    position: relative;
+}
+.accesorios_equipados div{
+    margin-left: 5%;
+}
+.accesorios_equipados p{
+    margin: 0;
+}
+.sinMargen{
+    padding: 0;
+}
+.sinMargen p{
+    margin: 0;
+    font-size: 12px;
+}
+.bordeVisible{
+    border: 3px solid gold;
+}
+.recuperar_contraseña{
+    color: white;
+    font-size: 17px;
+    width: 550px;
+    position: absolute;
+    padding: 40px;
+    margin-top: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #70294e;
+    border-radius: 24px;
+}
+.recuperar_contraseña h1{
+    text-align: center;
+    font-size: 21px;
+}
+.recuperar_contraseña input{
+    height: 45px;
+    margin: 2%;
+}
+.recuperar_contraseña input[type = "email"]{
+    width: 58%;
+    border-radius: 24px;
+    background: none;
+    border: 2px solid #b1dca3;  
+    outline: none;
+    color: white;
+}
+
+.recuperar_contraseña input[type = "submit"]{
+    text-align: center;
+    width: 58%;
+    border-radius: 24px;
+    background: none;
+    border: 2px solid #3498db; 
+    outline: none;
+    color: white;
+}
+
+.recuperar_contraseña  input[type = "submit"]:hover{
+    background: #3498db;
+}
+
+.contenedorJuego{
+    height: 700px;
+
+    width: 100%;
+    background-image: url("../img/Coliseum2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.BarraInfoJugador{
+    position: absolute;
+    height: 70px;
+    width: 350px;
+    left: 5%;
+}
+.BarraInfoEnemigo{
+    position: absolute;
+    height: 70px;
+    width: 350px;
+    right: 5%;
+}
+.contenedorJugador{
+    position: absolute;
+    bottom: 10%;
+    height: 350px;
+    width: 350px;
+}
+.contenedorJugador img{
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 50px;
+}
+.contenedorEnemigo{
+    position: absolute;
+    bottom: 10%;
+    height: 350px;
+    width: 350px;
+    right: 0%;  
+}
+.contenedorEnemigo img{
+    max-width: 100%;
+    max-height: 100%;
+    margin-right: 50px;
+
+}
+.MenuJugador{
+    position: absolute;
+    height: 160px;
+    width: 100%;
+    background-image: url("../img/fondoPiedra.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0%;
+}
+.accion{
+    height: 70px;
+    width: 150px;
+    margin: 4%;
+}
+
+.contenedorBarravida{
+    background: black; 
+    color: white; 
+    position: absolute;
+    bottom: 0%; 
+    width: 100%; 
+    height: 40px; 
+    padding: 5px;
+}
+
+.barravida{
+    border-radius: 10px;
+    border: 2px solid gold; 
+    height: 30px;
+    width: 75%;
+}
+.barravida div{
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    background: red;
+}
+
+.sangre {
+    position: absolute;
+    top: 0%;
+    left: 30%;
+    height: 200px;
+    width: 150px; 
+
+}
+
+.Posiones{
+    margin-left: 15%;
+}
+
+.btnAtacar{
+    width: 100px;
+    height: 100px;
+}
+
+.contenedorAcciones{
+    background-color: blue;
+    height: 100%; 
+    width: 50%;
+}
