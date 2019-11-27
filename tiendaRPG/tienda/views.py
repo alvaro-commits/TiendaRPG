@@ -59,13 +59,16 @@ def realizarcompra(request):
 
 @login_required
 def seleccionPersonaje(request):
+    perfil_qs = mod.Perfil.objects.filter(usuario = request.user)
+    if(not perfil_qs.exists()):
+        mod.Perfil.objects.create(usuario=request.user)
     clase = mod.Clase_Personaje.objects.all()
     perfil_qs = mod.Perfil.objects.filter(usuario=request.user,clase= None )
     if perfil_qs.exists():
         perfil = mod.Perfil.objects.get(usuario=request.user,clase= None )
         contexto = {
-           'clases' : clase,
-            'perfil' : perfil
+        'clases' : clase,
+        'perfil' : perfil
         }
         return render(request,'seleccionPersonaje.html', contexto)
     else:
@@ -85,6 +88,9 @@ def asignarClaseAPersonaje(request,**kwargs):
 
 @login_required
 def vistaperfil(request):
+    perfil_qs = mod.Perfil.objects.filter(usuario = request.user)
+    if(not perfil_qs.exists()):
+        return redirect('/seleccionPersonaje')
     perfil = mod.Perfil.objects.get(usuario = request.user)
     clasePerfil = perfil.clase
     if clasePerfil != None:
@@ -114,17 +120,18 @@ def vistaperfil(request):
         daño_base =clase.daño_base
         defensa_base =clase.defensa_base
 
-        vida_total = vida_base + casco_equipado.vida_extra + peto_equipado.vida_extra + manoplas_equipadas.vida_extra
-        + pantalones_equipadas.vida_extra + grebas_equipadas.vida_extra + anillo_equipado.vida_extra
+        vida_total = vida_base + casco_equipado.vida_extra + peto_equipado.vida_extra + manoplas_equipadas.vida_extra + pantalones_equipadas.vida_extra + grebas_equipadas.vida_extra + anillo_equipado.vida_extra
         perfil.vida_total = vida_total
 
-        daño_total = daño_base + casco_equipado.daño_extra + peto_equipado.daño_extra + manoplas_equipadas.daño_extra
-        + pantalones_equipadas.daño_extra + grebas_equipadas.daño_extra + anillo_equipado.daño_extra
+        daño_total = daño_base + casco_equipado.daño_extra + peto_equipado.daño_extra + manoplas_equipadas.daño_extra + pantalones_equipadas.daño_extra + grebas_equipadas.daño_extra + anillo_equipado.daño_extra
         perfil.daño_total = daño_total
 
-        defensa_total = defensa_base + casco_equipado.defensa_extra + peto_equipado.defensa_extra + manoplas_equipadas.defensa_extra
-        + pantalones_equipadas.defensa_extra + grebas_equipadas.defensa_extra + anillo_equipado.defensa_extra
+        defensa_total = defensa_base + casco_equipado.defensa_extra + peto_equipado.defensa_extra + manoplas_equipadas.defensa_extra + pantalones_equipadas.defensa_extra + grebas_equipadas.defensa_extra + anillo_equipado.defensa_extra
         perfil.defensa_total = defensa_total
+
+        posionesVida = mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de vida' ).count()
+        posionesDaño = mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de daño' ).count()
+        posion = mod.Posion.objects.all()
         
         perfil.save()
         if perfil.derrotas == 0:
@@ -132,6 +139,8 @@ def vistaperfil(request):
         else:
             kda = perfil.victorias / perfil.derrotas
         contexto = {
+            'posionesTotalesVida': posionesVida,
+            'posionesTotalesDaño': posionesDaño,
             'perfil' : perfil,
             'casco_equipado' : casco_equipado,
             'peto_equipado' : peto_equipado,
@@ -145,7 +154,8 @@ def vistaperfil(request):
             'pantalones' : pantalones,
             'grebas' : grebas,
             'anillos' : anillos,
-            'kda': kda
+            'kda': kda,
+            'posiones': posion
         }
         return render(request,'perfil.html',contexto)
     else:
@@ -165,6 +175,31 @@ def comprarAccesorio(request,**kwargs):
         messages.warning(request, 'No tienes los puntos suficientes.')
     return redirect('/perfil')
 
+def comprarPosion(request,**kwargs):
+    perfil = mod.Perfil.objects.get(usuario = request.user)
+    posion = mod.Posion.objects.get(id = kwargs.get('posion_id'))
+    ordenPosion = mod.PosionPerfil.objects.create(posion = posion)
+    perfil.save()
+    posionesVida = mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de vida' ).count()
+    posionesDaño = mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de daño' ).count()
+    if(perfil.total_puntos >= posion.costo):
+        if(posionesVida <3 and posion.nombre == "pócima de vida" ):
+            perfil.posion.add(ordenPosion)
+            perfil.total_puntos = perfil.total_puntos - posion.costo
+            perfil.save()
+            messages.success(request, 'Tu compra ha sido realizada exitosamente!')   
+        elif(posion.nombre == "pócima de vida"):
+            messages.warning(request, 'Ya tienes el maximo de posiones de vida.')
+        if(posionesDaño <3 and posion.nombre == "pócima de daño"):
+            perfil.posion.add(ordenPosion)
+            perfil.total_puntos = perfil.total_puntos - posion.costo
+            perfil.save()
+            messages.success(request, 'Tu compra ha sido realizada exitosamente!')
+        elif(posion.nombre == "pócima de daño"):
+            messages.warning(request, 'Ya tienes el maximo de posiones de daño.')
+    else:
+        messages.warning(request, 'No tienes los puntos suficientes.')
+    return redirect('/perfil')
 
 def login(request):
 
@@ -181,6 +216,9 @@ def registro(request):
             mod.Perfil.objects.create(usuario = usuario)
             messages.success(request, f'Tu cuenta ha sido creada exitosamente! ahora puedes ingresar.')
             return redirect('login')
+        else:
+            messages.warning(request, f'El nombre de usuario ingresado ya se encuentra registrado.')
+            return render(request,'registro.html')
     else:
         form = UserRegisterForm()
     return render(request,'registro.html',{'form': form})
@@ -212,13 +250,84 @@ def eliminar_item_carro(request,**kwargs):
     return redirect('/carro')
 
 def vistajuego(request):
-    enemigo = mod.Enemigo.objects.get()
     perfil = mod.Perfil.objects.get(usuario = request.user)
+    SeleccionEnemigo = mod.Enemigo.objects.get(nivel = perfil.victorias)
+    enemigo_asignado = mod.EnemigoAsignado.objects.create(nivel = SeleccionEnemigo.nivel, nombre =SeleccionEnemigo.nombre, vida = SeleccionEnemigo.vida,
+    daño = SeleccionEnemigo.daño, defensa = SeleccionEnemigo.defensa, imagen = SeleccionEnemigo.imagen)
+    perfil.enemigoAsignado = enemigo_asignado
+    perfil.save()
+    enemigo = perfil.enemigoAsignado
+    enemigoAsignado = mod.EnemigoAsignado.objects.get(perfil = perfil)
+
+    RegistroPosionesVida = mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de vida' )
+    RegistroPosionesDaño = mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de daño' )
+    perfil.vida_actual = perfil.vida_total
+    perfil.save()
     clase = perfil.clase
     contexto = {
+        'posionesVida' : RegistroPosionesVida,
+        'posionesDaño' : RegistroPosionesDaño,
+        'SeleccionEnemigo' : SeleccionEnemigo,
         'enemigo' : enemigo,
         'perfil' : perfil,
         'clase' : clase
     }
     return render(request,'juego.html',contexto)
+
+def atacar(request):
+    perfil = mod.Perfil.objects.get(usuario = request.user)
+    enemigoAsignado = mod.EnemigoAsignado.objects.get(perfil= perfil)
+
+    if(enemigoAsignado.vida > 0 ):
+        enemigoAsignado.vida = enemigoAsignado.vida-perfil.daño_total
+        enemigoAsignado.save()
+        data = enemigoAsignado.vida
+        return HttpResponse(data)
+    
+
+def ataqueEnemigo(request):
+    perfil = mod.Perfil.objects.get(usuario = request.user)
+    enemigoAsignado = mod.EnemigoAsignado.objects.get(perfil= perfil)
+    if(perfil.vida_actual > 0):
+        perfil.vida_actual = perfil.vida_actual-enemigoAsignado.daño
+        perfil.save()
+        data = perfil.vida_actual
+        return HttpResponse(data)
+
+def usarPosionVida(request):
+    perfil = mod.Perfil.objects.get(usuario = request.user)
+    RegistroPosionesVida = mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de vida' ).first()
+    vidaRestaurada = perfil.vida_actual+RegistroPosionesVida.posion.vida
+    if(perfil.vida_actual > 0 and vidaRestaurada <= perfil.vida_total):
+        perfil.vida_actual = perfil.vida_actual+RegistroPosionesVida.posion.vida
+        perfil.posion.remove(RegistroPosionesVida)
+        perfil.save()
+        data = perfil.vida_actual
+        return HttpResponse(data)
+
+def usarPosionDaño(request):
+    perfil = mod.Perfil.objects.get(usuario = request.user)
+    RegistroPosionesDaño= mod.PosionPerfil.objects.filter(perfil = perfil, posion__nombre ='pócima de daño' ).first()
+    dañoAumentado = perfil.daño_total+RegistroPosionesDaño.posion.daño
+    if(perfil.vida_actual > 0 ):
+        perfil.daño_total = dañoAumentado
+        perfil.posion.remove(RegistroPosionesDaño)
+        perfil.save()
+        data = perfil.daño_total
+        return HttpResponse(data)
+
+def vistaGanaste(request):
+    perfil = mod.Perfil.objects.get(usuario = request.user)
+    perfil.victorias = perfil.victorias +1
+    recompensa = mod.Recompensa.objects.get(nivel = perfil.victorias)
+    perfil.recompensa.add(recompensa)
+    perfil.save()
+    recompensaActiva= mod.Recompensa.objects.get(perfil__usuario = request.user, nivel = perfil.victorias)
+    nuevoPrecio = recompensaActiva.obtenerNuevoPrecio()
+    contexto = {"descuento" : recompensaActiva.descuento,
+                 "producto" : recompensaActiva.Producto,
+                 "nuevoPrecio" : nuevoPrecio}
+    return render(request,'ganaste!.html',contexto)
+
+
 

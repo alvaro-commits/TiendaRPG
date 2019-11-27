@@ -7,10 +7,15 @@ app_name = 'tienda'
 urlpatterns = [
     path('',views.VistaMenu.as_view(), name = 'menu'),
     path('carro/',views.Vistacarro, name ='/carro'),
-    
     path('perfil/',views.vistaperfil, name ='perfil'),
     path('juego/',views.vistajuego, name ='juego'),
+    path('atacar/',views.atacar),
+    path('ganaste!/',views.vistaGanaste),
+    path('ataqueEnemigo/',views.ataqueEnemigo),
+    path('usarPosionVida/',views.usarPosionVida),
+    path('usarPosionDaño/',views.usarPosionDaño),
     path('comprarAccesorio/<int:accesorio_id>',views.comprarAccesorio, name ='comprarAccesorio'),
+    path('comprarPosion/<int:posion_id>',views.comprarPosion, name ='comprarPosion'),
     path('seleccionPersonaje/',views.seleccionPersonaje, name ='seleccionPersonaje'),
     path('realizar_compra',views.realizarcompra, name ='realizarcompra'),
     path('seleccionPersonaje/(<int:id>),',views.asignarClaseAPersonaje, name ='asignarClaseAPersonaje'),

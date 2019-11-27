@@ -24,7 +24,8 @@ $(document).ready(
                     },
                     password1: {
                         required: true,
-                        contraseñaFuerte: true
+                        contraseñaFuerte: true,
+                        minlength: true
                     },
                     password2: {
                         required: true,
@@ -51,6 +52,7 @@ $(document).ready(
                         email: "Ingrese un correo valido."
                     },
                     password1: {
+                        minlength:"Su contraseña debe tener mas de 8 caracteres",
                         required: "Debe ingresar su contraseña.",
                         minlength: "La contraseña debe tener mas de 8 caracteres",
                     },

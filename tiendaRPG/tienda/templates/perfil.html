@@ -74,7 +74,23 @@
     <hr>
     <p><strong>Mis puntos: </strong> {{perfil.total_puntos}}</p>
     <hr>
-    <h1 style="text-align: center;"> Accesorios</h1>
+    <h2>Pócimas magicas</h2>
+    <p>Maximo 3 de cada tipo.</p>
+    <p>Tienes: {{posionesTotalesVida}} pócima de vida</p>
+    <p>Tienes: {{posionesTotalesDaño}} pócima de daño</p>
+    {%for accesorio in posiones %}
+    <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">
+        <a href="{% url 'tienda:comprarPosion' accesorio.id %}"><img src="{{accesorio.imagen}}"
+                class="card-img-top imagen125x125"></a>
+        <div class="card-body sinMargen">
+            <h6 class="card-title" style="margin: 0; text-align: center; font-size: 12px;">{{accesorio.nombre}}</h6>
+            <p>Vida: {{accesorio.vida}}</p>
+            <p>Daño: {{accesorio.daño}}</p>
+            <h6 class="card-text" style="text-align: center; font-size: 15px;">Puntos {{accesorio.costo}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+    <h1 > Accesorios</h1>
     <h2> Cascos</h2>
     {%for accesorio in cascos %}
     <div class="card bloque-horizontal" style="width: 127px; height: 240px; margin-right: 2%; position: relative;">

@@ -87,15 +87,17 @@
         </div>
     </nav>
     <div  style="position: relative; height: 700px; display: block;">
+        <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="{% static 'js/jquery.validate.js' %}"></script>
+        <script src="{% static 'js/validador.js' %}"></script>
     {% block content %}
 
 
     {% endblock %}
     </div>
     <!-- JavaScript -->
-    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
-    <script src="{% static 'js/jquery.validate.js' %}"></script>
-    <script src="{% static 'js/validador.js' %}"></script>
+
 
 </body>
 

@@ -302,7 +302,6 @@ display: none;
     margin: 0;
     font-size: 12px;
 }
-
 .bordeVisible{
     border: 3px solid gold;
 }
@@ -354,27 +353,28 @@ display: none;
     height: 700px;
 
     width: 100%;
-    background-color: red;
+    background-image: url("../img/Coliseum2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 .BarraInfoJugador{
     position: absolute;
     height: 70px;
     width: 350px;
-    background-color: green;
+    left: 5%;
 }
 .BarraInfoEnemigo{
     position: absolute;
     height: 70px;
     width: 350px;
-    background-color: green; 
-    right: 0%;
+    right: 5%;
 }
 .contenedorJugador{
     position: absolute;
-    top: 12%;
+    bottom: 10%;
     height: 350px;
     width: 350px;
-    background-color: green;
 }
 .contenedorJugador img{
     max-width: 100%;
@@ -383,23 +383,25 @@ display: none;
 }
 .contenedorEnemigo{
     position: absolute;
-    top: 12%;
+    bottom: 10%;
     height: 350px;
     width: 350px;
-    background-color: green; 
     right: 0%;  
 }
 .contenedorEnemigo img{
     max-width: 100%;
     max-height: 100%;
     margin-right: 50px;
+
 }
 .MenuJugador{
     position: absolute;
-    height: 180px;
+    height: 160px;
     width: 100%;
-    background-color: green; 
-    bottom: 6%;
+    background-image: url("../img/fondoPiedra.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0%;
 }
 .accion{
     height: 70px;
@@ -428,4 +430,28 @@ display: none;
     height: 100%;
     width: 100%;
     background: red;
+}
+
+.sangre {
+    position: absolute;
+    top: 0%;
+    left: 30%;
+    height: 200px;
+    width: 150px; 
+
+}
+
+.Posiones{
+    margin-left: 15%;
+}
+
+.btnAtacar{
+    width: 100px;
+    height: 100px;
+}
+
+.contenedorAcciones{
+    background-color: blue;
+    height: 100%; 
+    width: 50%;
 }
